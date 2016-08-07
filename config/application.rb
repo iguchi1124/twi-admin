@@ -18,6 +18,13 @@ Bundler.require(*Rails.groups)
 
 module TwitterUtilities
   class Application < Rails::Application
+    config.cache_store = :redis_store, {
+      host: 'localhost',
+      port: 6379,
+      db: 0,
+      namespace: 'cache'
+    }
+
     config.generators do |g|
       g.assets false
       g.helper false

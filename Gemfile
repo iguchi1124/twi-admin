@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'puma', '~> 3.0'
+gem 'redis-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
