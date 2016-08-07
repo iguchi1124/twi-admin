@@ -38,3 +38,6 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Redis
+dump.rdb
