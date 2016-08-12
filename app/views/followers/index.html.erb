@@ -1,0 +1,12 @@
+<h1>Followers#index</h1>
+<table>
+  <tr>
+    <th>id</th><th>name</th>
+  </tr>
+  <% @followers.each do |follower| %>
+      <tr>
+        <td><%= follower[:screen_name] %></td>
+        <td><%= follower[:name] %></td>
+      </tr>
+  <% end %>
+</table>
