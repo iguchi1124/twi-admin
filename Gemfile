@@ -20,9 +20,12 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'factory_girl'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'sqlite3'
 end
 
