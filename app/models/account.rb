@@ -9,7 +9,7 @@ class Account < ApplicationRecord
 
   def followers
     @followers ||= Rails.cache.fetch(cache_key(:followers)) {
-      rest_client.users(follower_ids)
+      users(follower_ids)
     }
   end
 
@@ -20,15 +20,27 @@ class Account < ApplicationRecord
   end
 
   def friends
-    @followers ||= Rails.cache.fetch(cache_key(:friends)) {
-      rest_client.users(friend_ids)
+    @friends ||= Rails.cache.fetch(cache_key(:friends)) {
+      users(friend_ids)
     }
   end
 
   def unreturned_friends
     @unreturned_friends ||= Rails.cache.fetch(cache_key(:unreturned_friends)) {
-      rest_client.users(friend_ids - follower_ids)
+      users(friend_ids - follower_ids)
     }
+  end
+
+  def follow!(*user_ids)
+    rest_client.follow(users(user_ids.flatten))
+  end
+
+  def unfollow!(*user_ids)
+    rest_client.unfollow(users(user_ids.flatten))
+  end
+
+  def followed?(user)
+    friends.include?(user)
   end
 
   def self.upsert_by_omniauth_params!(params)
@@ -63,5 +75,22 @@ class Account < ApplicationRecord
 
   def cache_key(attr)
     "#{self.id}_#{attr}"
+  end
+
+  def user_cache_key(id)
+    "user_#{id}"
+  end
+
+  def users(*user_ids)
+    user_ids = user_ids.flatten
+    users = user_ids.map { |id| Rails.cache.read(user_cache_key(id)) }
+    ids_users = Hash[user_ids.zip(users)]
+
+    unfilled_ids = ids_users.select { |_, v| v.nil? }.keys
+    rest_client.users(unfilled_ids).each do |user|
+      ids_users[user.id] = Rails.cache.fetch(user_cache_key(user.id)) { user }
+    end
+
+    ids_users.values
   end
 end

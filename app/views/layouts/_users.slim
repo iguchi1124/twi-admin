@@ -3,8 +3,14 @@ table.table.table-bordered.table-striped
     tr
       th user id
       th name
+      th
   tbody
     - users.each do |user|
       tr
         td = user.screen_name
         td = user.name
+        td 
+          - if current_account.followed?(user)
+            = link_to 'remove', friend_path(user.id), method: :delete, class: 'btn btn-danger'
+          - else
+            = link_to 'follow', friend_path(user.id), method: :post, class: 'btn btn-success'
