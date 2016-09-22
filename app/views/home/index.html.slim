@@ -1,0 +1,5 @@
+.jumbotron
+  h1 = t('application.title')
+  p = t('application.description')
+  - unless signed_in?
+    p = link_to t('sign_in_your_twitter_account'), sign_in_path, class: 'btn btn-primary btn-lg'

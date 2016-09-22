@@ -5,11 +5,11 @@ class FriendsController < ApplicationController
 
   def create
     current_user.follow!(params[:id])
-    redirect_to :back, notice: 'follow!'
+    redirect_to :back, notice: t('followed_an_user')
   end
 
   def destroy
     current_user.unfollow!(params[:id])
-    redirect_to :back, notice: 'remove!'
+    redirect_to :back, notice: t('removed_an_user')
   end
 end

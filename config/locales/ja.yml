@@ -1,4 +1,17 @@
 ja:
+  application:
+    title: Twi Admin
+    description: あなたのフォロワー・フォローしているユーザーを手軽に管理
   user:
     id: ユーザーID
     name: ユーザー名
+  sign_in: ログイン
+  sign_out: ログアウト
+  followers: フォロワー
+  friends: フォロー
+  unreturned_friends: 片思い
+  sign_in_your_twitter_account: Twitterアカウントでログインする
+  successfully_signed_in: ログインしました。
+  successfully_signed_out: ログアウトしました。
+  followed_an_user: ユーザーを1人フォローしました。
+  removed_an_user: ユーザーを1人リムーブしました。
