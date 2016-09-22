@@ -1,0 +1,22 @@
+nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"]
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to 'brand', root_path, class: 'navbar-brand'
+    #navbar-collapse.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        - if signed_in?
+          li[class="#{active(followers_path)}"] 
+            = link_to 'followers', followers_path
+          li[class="#{active(friends_path)}"]
+            = link_to 'follows', friends_path
+          li[class="#{active(unreturned_friends_path)}"]
+            = link_to 'unreturned_friends', unreturned_friends_path
+      ul.nav.navbar-nav.navbar-right
+        - if signed_in?
+          li = link_to 'Sign out', sign_out_path, method: :delete
+        - else
+          li = link_to 'Sign in', '/auth/twitter'

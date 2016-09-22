@@ -8,5 +8,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:account_id)
+    redirect_to root_path, notice: 'Successfully signed out.'
   end
 end

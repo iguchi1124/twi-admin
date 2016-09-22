@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    @current_account.present?
+    current_account.present?
   end
 end

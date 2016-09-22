@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0'
 
-gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.2'
+gem 'honoka-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'omniauth'
@@ -13,6 +13,7 @@ gem 'omniauth-twitter'
 gem 'puma', '~> 3.0'
 gem 'redis-rails'
 gem 'sass-rails', '~> 5.0'
+gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'twitter'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -24,7 +25,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
-  gem 'rspec'
   gem 'rspec-rails'
   gem 'sqlite3'
 end

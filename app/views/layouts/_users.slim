@@ -1,0 +1,10 @@
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th user id
+      th name
+  tbody
+    - users.each do |user|
+      tr
+        td = user.screen_name
+        td = user.name

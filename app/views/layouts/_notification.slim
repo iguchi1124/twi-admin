@@ -1,0 +1,10 @@
+- if notice
+  .alert.alert-info.alert-dismissible role="alert"
+    = notice
+    button aria-label="Close" class="close" data-dismiss="alert" type="button"
+      span aria-hidden="true" &times;
+- if alert
+  .alert.alert-warning.alert-dismissible role="alert"
+    = alert
+    button aria-label="Close" class="close" data-dismiss="alert" type="button"
+      span aria-hidden="true" &times;
