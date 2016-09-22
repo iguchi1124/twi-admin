@@ -17,7 +17,7 @@ nav.navbar.navbar-default
             = link_to t('unreturned_friends'), unreturned_friends_path
       ul.nav.navbar-nav.navbar-right
         - if signed_in?
-          li = image_tag current_user.image_url, class: 'icon'
+          li.hidden-sm.hidden-xs = image_tag current_user.image_url, class: 'icon'
           li = link_to t('sign_out'), sign_out_path, method: :delete
         - else
           li = link_to t('sign_in'), sign_in_path

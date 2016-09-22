@@ -16,3 +16,5 @@ ja:
   successfully_signed_out: ログアウトしました。
   followed_an_user: ユーザーを1人フォローしました。
   removed_an_user: ユーザーを1人リムーブしました。
+  follow: フォロー
+  unfollow: リムーブ
