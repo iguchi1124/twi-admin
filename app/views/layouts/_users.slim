@@ -1,12 +1,14 @@
 table.table.table-bordered.table-striped
   thead
     tr
+      th = t('user.icon')
       th = t('user.id')
       th = t('user.name')
       th
   tbody
     - users.each do |user|
       tr
+        td = image_tag user.profile_image_url
         td = user.screen_name
         td = user.name
         td 

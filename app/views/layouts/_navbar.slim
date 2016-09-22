@@ -5,7 +5,7 @@ nav.navbar.navbar-default
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to 'Twi Admin', root_path, class: 'navbar-brand'
+      = link_to t('application.title'), root_path, class: 'navbar-brand'
     #navbar-collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
         - if signed_in?
@@ -17,6 +17,7 @@ nav.navbar.navbar-default
             = link_to t('unreturned_friends'), unreturned_friends_path
       ul.nav.navbar-nav.navbar-right
         - if signed_in?
+          li = image_tag current_user.image_url, class: 'icon'
           li = link_to t('sign_out'), sign_out_path, method: :delete
         - else
           li = link_to t('sign_in'), sign_in_path
