@@ -5,8 +5,8 @@
   </tr>
   <% @followers.each do |follower| %>
       <tr>
-        <td><%= follower[:screen_name] %></td>
-        <td><%= follower[:name] %></td>
+        <td><%= follower.screen_name %></td>
+        <td><%= follower.name %></td>
       </tr>
   <% end %>
 </table>

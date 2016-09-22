@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   delete '/sign_out', to: 'sessions#destroy'
 
   resources :followers, only: :index
+  resources :unreturned_friends, only: :index
 end

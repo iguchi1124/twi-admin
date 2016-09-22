@@ -20,13 +20,14 @@ class Account < ApplicationRecord
     account.description = params['info']['description']
     account.access_token = params['credentials']['token']
     account.access_token_secret = params['credentials']['secret']
-
     account.save!
+
+    account
   end
 
   private
 
   def oauth_params
-    Rails.application.secrets.twitter.merge(attributes.slice(:access_token, :access_token_secret))
+    Rails.application.secrets.twitter.merge(attributes.slice('access_token', 'access_token_secret'))
   end
 end
