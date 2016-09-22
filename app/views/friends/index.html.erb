@@ -1,0 +1,12 @@
+<h1>Friends#index</h1>
+<table>
+  <tr>
+    <th>id</th><th>name</th>
+  </tr>
+  <% @friends.each do |friend| %>
+      <tr>
+        <td><%= friend.screen_name %></td>
+        <td><%= friend.name %></td>
+      </tr>
+  <% end %>
+</table>
