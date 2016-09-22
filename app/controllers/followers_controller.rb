@@ -1,5 +1,6 @@
 class FollowersController < ApplicationController
   def index
-    @followers = current_account.rest_client.followers.attrs[:users]
+    follower_ids = current_account.rest_client.follower_ids.to_a
+    @followers = current_account.rest_client.users(follower_ids)
   end
 end
