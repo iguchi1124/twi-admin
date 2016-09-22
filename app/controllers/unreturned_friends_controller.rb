@@ -1,5 +1,5 @@
 class UnreturnedFriendsController < ApplicationController
   def index
-    @unreturned_friends = current_account.unreturned_friends
+    @unreturned_friends = current_user.unreturned_friends
   end
 end

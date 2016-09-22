@@ -1,2 +1,4 @@
 ja:
-  account:
+  user:
+    id: ユーザーID
+    name: ユーザー名

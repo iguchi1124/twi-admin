@@ -1,4 +1,4 @@
-class Account < ApplicationRecord
+class User < ApplicationRecord
   validates :provider, inclusion: { in: ['twitter'] }
 
   def follower_ids
@@ -48,19 +48,19 @@ class Account < ApplicationRecord
   end
 
   def self.upsert_by_omniauth_params!(params)
-    account = find_or_initialize_by(provider: params['provider'], uid: params['uid'])
-    account.provider = params['provider']
-    account.uid = params['uid']
-    account.nickname = params['info']['nickname']
-    account.name = params['info']['name']
-    account.email = params['info']['email']
-    account.image_url = params['info']['image']
-    account.description = params['info']['description']
-    account.access_token = params['credentials']['token']
-    account.access_token_secret = params['credentials']['secret']
-    account.save!
+    user = find_or_initialize_by(provider: params['provider'], uid: params['uid'])
+    user.provider = params['provider']
+    user.uid = params['uid']
+    user.nickname = params['info']['nickname']
+    user.name = params['info']['name']
+    user.email = params['info']['email']
+    user.image_url = params['info']['image']
+    user.description = params['info']['description']
+    user.access_token = params['credentials']['token']
+    user.access_token_secret = params['credentials']['secret']
+    user.save!
 
-    account
+    user
   end
 
   private
