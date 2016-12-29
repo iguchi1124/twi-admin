@@ -1,32 +1,34 @@
 class User < ApplicationRecord
+  CACHE_EXPIRY_DURATION = 10.minutes
+
   validates :provider, inclusion: { in: ['twitter'] }
 
   def follower_ids
-    @follower_ids ||= Rails.cache.fetch(cache_key(:follower_ids)) do
+    @follower_ids ||= Rails.cache.fetch(cache_key(:follower_ids), expires_in: CACHE_EXPIRY_DURATION) do
       rest_client.follower_ids.to_a
     end
   end
 
   def followers
-    @followers ||= Rails.cache.fetch(cache_key(:followers)) do
+    @followers ||= Rails.cache.fetch(cache_key(:followers), expires_in: CACHE_EXPIRY_DURATION) do
       users(follower_ids)
     end
   end
 
   def friend_ids
-    @friend_ids ||= Rails.cache.fetch(cache_key(:friend_ids)) do
+    @friend_ids ||= Rails.cache.fetch(cache_key(:friend_ids), expires_in: CACHE_EXPIRY_DURATION) do
       rest_client.friend_ids.to_a
     end
   end
 
   def friends
-    @friends ||= Rails.cache.fetch(cache_key(:friends)) do
+    @friends ||= Rails.cache.fetch(cache_key(:friends), expires_in: CACHE_EXPIRY_DURATION) do
       users(friend_ids)
     end
   end
 
   def unreturned_friends
-    @unreturned_friends ||= Rails.cache.fetch(cache_key(:unreturned_friends)) do
+    @unreturned_friends ||= Rails.cache.fetch(cache_key(:unreturned_friends), expires_in: CACHE_EXPIRY_DURATION) do
       users(friend_ids - follower_ids)
     end
   end
@@ -92,19 +94,19 @@ class User < ApplicationRecord
 
     unfilled_ids = ids_users.select { |_, v| v.nil? }.keys
     rest_client.users(unfilled_ids).each do |user|
-      ids_users[user.id] = Rails.cache.fetch(user_cache_key(user.id)) { user }
+      ids_users[user.id] = Rails.cache.fetch(user_cache_key(user.id), expires_in: CACHE_EXPIRY_DURATION) { user }
     end
 
     ids_users.values
   end
 
   def refresh_cached_friends(friends)
-    Rails.cache.write(cache_key(:friend_ids), friends.map(&:id))
-    Rails.cache.write(cache_key(:friends), friends)
+    Rails.cache.write(cache_key(:friend_ids), friends.map(&:id), expires_in: CACHE_EXPIRY_DURATION)
+    Rails.cache.write(cache_key(:friends), friends, expires_in: CACHE_EXPIRY_DURATION)
   end
 
   def refresh_cached_followers(followers)
-    Rails.cache.write(cache_key(:follower_ids), followers.map(&:id))
-    Rails.cache.write(cache_key(:followers), followers)
+    Rails.cache.write(cache_key(:follower_ids), followers.map(&:id), expires_in: CACHE_EXPIRY_DURATION)
+    Rails.cache.write(cache_key(:followers), followers, expires_in: CACHE_EXPIRY_DURATION)
   end
 end
